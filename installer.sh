@@ -1,11 +1,11 @@
 #!/bin/sh
 clear
 echo -e "\x1b[32m\033[1m   #############################################"
-echo -e "\x1b[32m #    [ Arch Installation Script by Manoj]    #"
+echo -e "\x1b[32m #    [ Ubuntu Installation Script by Pro-L!nux ]    #"
 echo -e "\x1b[32m   #############################################"
 sleep 1
-folder="/data/local/tmp/arch"
-
+folder="/data/local/tmp/ubuntu"
+file="$folder/rootfs-arm64.tar.gz"
 if [ -d "$folder" ];
 then
         first=1
@@ -14,22 +14,34 @@ else
         sleep 1 && echo -e " [ Creating $folder ]"
         mkdir $folder
 fi
-
+if [ -f "$file" ] ; then
+    sleep 1
+    echo -e "\x1b[32m [ rootfs file exists ! ] " && sleep 1
+    echo -e "\x1b[32m [ Deleting file ... ] "
+    rm "$file" && sleep 1
+    echo -e "\x1b[32m [ Done ! ]"
+fi
 cd $folder
-arch="aarch64"
-
-wget http://archlinuxarm.org/os/ArchLinuxARM-$arch-latest.tar.gz
-
+arch=`uname -m`
+case "$arch" in
+    aarch64|armv8l) arch="arm64" ;;
+    armv7l|arm|armhf) arch="armhf" ;;
+		*)
+			echo -e "\x1b[33m [ Unknown architecture ]"; exit 1 ;;
+		esac
+echo " [ Device architecture is $arch ]"
+sleep 1
+echo -e "\x1b[33m [ Downloading Ubuntu 20.10 ($arch)... ]"
+wget https://raw.githubusercontent.com/mjuned47/Termux-Rootfs/master/Ubuntu/20.10/$arch/rootfs-$arch.tar.gz
 echo -e "\x1b[33m [ Downloaded ! ]"
 
 sleep 1
 
-
 echo -e "\x1b[33m [ Now Unpacking File... ]"
-tar xzf ArchLinuxARM-$arch-latest.tar.gz
+tar xzf rootfs-$arch.tar.gz
 echo -e "\x1b[32m [ Unpacked ! ]"
 mkdir $folder/sdcard
-mv ArchLinuxARM-$arch-latest.tar.gz /sdcard
+mv rootfs-$arch.tar.gz /sdcard
 
 echo -e "\x1b[33m [ Fixing Internet ... ]"
 
@@ -41,16 +53,14 @@ groupadd -g 3004 aid_net_raw
 groupadd -g 1003 aid_graphics
 usermod -g 3003 -G 3003,3004 -a _apt
 usermod -G 3003 -a root
-pacman -Rns lvm2 linux-firmware linux-aarch64 systemd systemd-sysvcompat libusb netctl dhcpcd device-mapper usbutils libpcap iptables cryptsetup iproute2 xfsprogs s-nail reiserfsprogs pciutils licenses gettext man-db jfsutils procps-ng mdadm haveged inetutils psmisc logrotate sysfsutils iputils texinfo diffutils net-tools 
 echo "127.0.0.1 localhost" > /etc/hosts
-chmod 755 -R /etc /usr /var /boot /home /mnt /opt /run /srv
 '
 sleep 1 && echo -e "\x1b[33m [ Done ! ]"
 sleep 1
-echo -e "\x1b[33m [ Downloaded Arch File has been moved to Internal storage. You can unpack for clean Installation without Downloading ]"
+echo -e "\x1b[33m [ Downloaded Ubuntu File has been moved to Internal storage. You can unpack for clean Installation without Downloading ]"
 echo -e "\x1b[33m [ To unpack it : go to $folder ]"
-echo -e "\x1b[33m [ and type : tar xzf /sdcard/ArchLinuxARM-$arch-latest.tar.gz ]"
-echo -e "\x1b[32m [ Installation Completed,You can start Arch system ]"
-echo -e " [ Arch is installed at $folder ]\e[0m"
+echo -e "\x1b[33m [ and type : tar xzf /sdcard/rootfs-$arch.tar.gz ]"
+echo -e "\x1b[32m [ Installation Completed,You can start Ubuntu system ]"
+echo -e " [ Ubuntu is installed at $folder ]\e[0m"
 
 sleep 1

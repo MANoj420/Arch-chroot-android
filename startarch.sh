@@ -18,8 +18,8 @@ echo "   [ Mounting /proc ... ]"
 busybox mount --bind /proc $folder/proc
 echo "   [ Mounting /dev/pts ... ]"
 busybox mount --bind /dev/pts $folder/dev/pts
-echo "   [ Mounting /sdcard ... ]"
-busybox mount --bind /sdcard $folder/sdcard
+echo "   [ Mounting /storage ... ]"
+busybox mount --bind /storage $folder/storage
 echo -e "\x1b[32m [ Mounting Done ! ]"
 
 echo -e "\x1b[32m [ Chrooting ... ]\e[0m"
@@ -31,8 +31,8 @@ echo -e " [ Unmounting /dev ... ]"
 busybox umount $folder/dev
 echo -e " [ Unmounting /proc ... ]"
 busybox umount $folder/proc
-echo -e " [ Unmounting sdcard ... ]"
-busybox umount $folder/sdcard
+echo -e " [ Unmounting storage ... ]"
+busybox umount $folder/storage
 echo -e " [ Unmounting /sys ... ]"
 busybox umount $folder/sys
 echo -e " \x1b[32m[ Unmounted ]\e[0m"
