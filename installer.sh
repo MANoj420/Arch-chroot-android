@@ -32,7 +32,7 @@ case "$arch" in
 echo " [ Device architecture is $arch ]"
 sleep 1
 echo -e "\x1b[33m [ Downloading Ubuntu 20.10 ($arch)... ]"
-wget https://raw.githubusercontent.com/mjuned47/Termux-Rootfs/master/Ubuntu/20.10/$arch/rootfs-$arch.tar.gz
+busybox wget https://raw.githubusercontent.com/mjuned47/Termux-Rootfs/master/Ubuntu/20.10/$arch/rootfs-$arch.tar.gz
 echo -e "\x1b[33m [ Downloaded ! ]"
 
 sleep 1
