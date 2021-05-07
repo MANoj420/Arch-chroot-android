@@ -5,7 +5,7 @@ echo -e "\x1b[32m #    [ Arch Installation Script by Manoj]    #"
 echo -e "\x1b[32m   #############################################"
 sleep 1
 folder="/data/local/tmp/arch"
-file="$folder/ArchLinuxARM-aarch64-latest.tar.gz"
+
 if [ -d "$folder" ];
 then
         first=1
@@ -14,13 +14,7 @@ else
         sleep 1 && echo -e " [ Creating $folder ]"
         mkdir $folder
 fi
-if [ -f "$file" ] ; then
-    sleep 1
-    echo -e "\x1b[32m [ rootfs file exists ! ] " && sleep 1
-    echo -e "\x1b[32m [ Deleting file ... ] "
-    rm "$file" && sleep 1
-    echo -e "\x1b[32m [ Done ! ]"
-fi
+
 cd $folder
 arch="aarch64"
 
