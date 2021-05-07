@@ -22,16 +22,8 @@ if [ -f "$file" ] ; then
     echo -e "\x1b[32m [ Done ! ]"
 fi
 cd $folder
-arch=`uname -m`
-case "$arch" in
-    aarch64|armv8l) arch="aarch64" ;;
-    armv7l|arm|armhf) arch="armv7" ;;
-		*)
-			echo -e "\x1b[33m [ Unknown architecture ]"; exit 1 ;;
-		esac
-echo " [ Device architecture is $arch ]"
-sleep 1
-echo -e "\x1b[33m [ Downloading Arch Linux ($arch)... ]"
+arch="aarch64"
+
 wget http://archlinuxarm.org/os/ArchLinuxARM-$arch-latest.tar.gz
 
 echo -e "\x1b[33m [ Downloaded ! ]"
