@@ -24,6 +24,7 @@ echo -e "\x1b[33m [ Downloaded ! ]"
 
 sleep 1
 
+
 echo -e "\x1b[33m [ Now Unpacking File... ]"
 tar xzf ArchLinuxARM-$arch-latest.tar.gz
 echo -e "\x1b[32m [ Unpacked ! ]"
