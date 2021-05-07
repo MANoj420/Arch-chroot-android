@@ -5,7 +5,7 @@ echo -e "\x1b[32m #    [ Arch Installation Script by Manoj]    #"
 echo -e "\x1b[32m   #############################################"
 sleep 1
 folder="/data/local/tmp/arch"
-file="$folder/ArchLinuxARM-$arch-latest.tar.gz"
+file="$folder/ArchLinuxARM-aarch64-latest.tar.gz"
 if [ -d "$folder" ];
 then
         first=1
